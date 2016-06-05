@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Chat beta(1)", "Chat beta\", "{B93D0BF3-E1BD-45FF-B9E9-1DC97B876256}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{39dae4f3-b44c-474b-9b9a-5c2bcf311090}|CB.Dll.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_4726"
+		Debug.AspNetCompiler.PhysicalPath = "Chat beta\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_4726\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_4726"
+		Release.AspNetCompiler.PhysicalPath = "Chat beta\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_4726\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "4726"
+		SlnRelativePath = "Chat beta\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CB.Dll", "CB.Dll\CB.Dll.csproj", "{39DAE4F3-B44C-474B-9B9A-5C2BCF311090}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B93D0BF3-E1BD-45FF-B9E9-1DC97B876256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B93D0BF3-E1BD-45FF-B9E9-1DC97B876256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B93D0BF3-E1BD-45FF-B9E9-1DC97B876256}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B93D0BF3-E1BD-45FF-B9E9-1DC97B876256}.Debug|x64.Build.0 = Debug|Any CPU
+		{B93D0BF3-E1BD-45FF-B9E9-1DC97B876256}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B93D0BF3-E1BD-45FF-B9E9-1DC97B876256}.Debug|x86.Build.0 = Debug|Any CPU
+		{B93D0BF3-E1BD-45FF-B9E9-1DC97B876256}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{B93D0BF3-E1BD-45FF-B9E9-1DC97B876256}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{B93D0BF3-E1BD-45FF-B9E9-1DC97B876256}.Release|x64.ActiveCfg = Debug|Any CPU
+		{B93D0BF3-E1BD-45FF-B9E9-1DC97B876256}.Release|x64.Build.0 = Debug|Any CPU
+		{B93D0BF3-E1BD-45FF-B9E9-1DC97B876256}.Release|x86.ActiveCfg = Debug|Any CPU
+		{B93D0BF3-E1BD-45FF-B9E9-1DC97B876256}.Release|x86.Build.0 = Debug|Any CPU
+		{39DAE4F3-B44C-474B-9B9A-5C2BCF311090}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39DAE4F3-B44C-474B-9B9A-5C2BCF311090}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39DAE4F3-B44C-474B-9B9A-5C2BCF311090}.Debug|x64.ActiveCfg = Debug|x64
+		{39DAE4F3-B44C-474B-9B9A-5C2BCF311090}.Debug|x64.Build.0 = Debug|x64
+		{39DAE4F3-B44C-474B-9B9A-5C2BCF311090}.Debug|x86.ActiveCfg = Debug|x86
+		{39DAE4F3-B44C-474B-9B9A-5C2BCF311090}.Debug|x86.Build.0 = Debug|x86
+		{39DAE4F3-B44C-474B-9B9A-5C2BCF311090}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39DAE4F3-B44C-474B-9B9A-5C2BCF311090}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39DAE4F3-B44C-474B-9B9A-5C2BCF311090}.Release|x64.ActiveCfg = Release|x64
+		{39DAE4F3-B44C-474B-9B9A-5C2BCF311090}.Release|x64.Build.0 = Release|x64
+		{39DAE4F3-B44C-474B-9B9A-5C2BCF311090}.Release|x86.ActiveCfg = Release|x86
+		{39DAE4F3-B44C-474B-9B9A-5C2BCF311090}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
