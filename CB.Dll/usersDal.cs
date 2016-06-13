@@ -94,5 +94,17 @@ new SqlParameter("@last_msg_id", SqlHelper.ToDbValue(model.last_msg_id)));
             new SqlParameter("@last_msg_id", SqlHelper.ToDbValue(model.last_msg_id)));
         }
 
+        public DataTable inquiry_login(string username)
+        {
+            string Sql = "select Pwd,NickName from users where UserID='" + username + "'";
+            return SqlHelper.ExecuteDataTable(Sql);
+        }
+
+        public DataTable inquiry_users()
+        {
+            string Sql = "select NickName,UserID from users";
+            return SqlHelper.ExecuteDataTable(Sql);
+        }
+
     }
 }

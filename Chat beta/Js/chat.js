@@ -1,27 +1,13 @@
 ﻿$(function () {
-    //用户登录状态判断
-    //if (!CheckLoginState()) {
-    //    window.location.href = "Login.html";
-    //}
-    //else {
-    //    GetMessage();
-    //    GetOnline();
-    //    AddExpression();
-    //    CheckSend();
-    //    UpdateMessage();
-    //    UpdateOnline();
-    //    Exit();
-    //}
 
-    //1.用户登录状态判断
+    //1.获取用户名
     $.ajax({
         type: "GET",
         url: "Index.aspx",
-        data: "action=checkLoginState",
+        data: "action=getName",
         success: function (data) {
-            if (data != "true") {
-                window.location.href = "Login.html";
-            }
+            rec_id="";
+            $("#username").html(data);
         }
     });
 
@@ -30,12 +16,13 @@
         type: "GET",
         url: "Index.aspx",
         data: "action=getMsg",
-        error:"",
+        error: "",
         success: function (data) {
-            $("#chat-dialog-con").html(data);
-            //$("#chat-dialog-con ul").html(data);
-        } 
+            $(".m-message ul").html(data);
+            scrollB();
+        }
     });
+
 
     //3.获取在线用户
     $.ajax({
@@ -44,17 +31,20 @@
         data: "action=getOnline",
         success: function (data) {
             if (data != "null") {
-                $("#chat-user-con ul").html(data);
+                $("#m-list-ul").html(data);
+            } else {
+                console.log("user list data null");
             }
         }
     });
 
-    //强行隐藏滚动条
-    $("#right-content-b").niceScroll({
-        cursorborder: "",
-        cursorcolor: "#dedede",
-        boxzoom: true
+    //对应id获取消息
+    $('#m-list-ul').on('click', 'li', function () {
+        console.log("rec_id change");
+        rec_id = $(this).attr('id');
+        GetMessage();
     });
+
 
     //绑定回车事件
     $('#txtInput').keydown(function (e) {
@@ -71,25 +61,13 @@
         }
     });
 
-    //6.发送消息判断
-    $("#btnSend").click(function () {
-        var sendMsg = $("#txtInput");
-        if ($.trim(sendMsg.val()) != "") {
-            SendMessage(sendMsg.val());
-        }
-        else {
-            alert("发送内容不能为空!");
-            sendMsg.focus();
-            return false;
-        }
-    });
 
     //7.实时刷新聊天内容
     //GetMessage();
     setInterval(GetMessage, 1500);
 
     //8.实时刷新在线用户
-    setInterval(GetOnline, 2000);
+    setInterval(GetOnline, 1000);
 
     //9.退出时销毁一切信息
     $(window).unload(function () {
@@ -109,7 +87,7 @@ function SendMessage(msg) {
     $.ajax({
         type: "GET",
         url: "Index.aspx",
-        data: "action=sendMsg&con=" + escape(msg) + "&d=" + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds(),
+        data: "action=sendMsg&con=" + escape(msg) +"&rec_id="+rec_id+ "&d=" + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds(),
         success: function (data) {
             if (data == "success") {
                 GetMessage();
@@ -126,21 +104,14 @@ function SendMessage(msg) {
 }
 
 //获取消息
-//flagB是否在底部
 function GetMessage() {
-    var flagB = false;
-    if (isBottom()) {
-        flagB = true;
-    }
     $.ajax({
-        type:"GET",
-        url:"Index.aspx",
-        data:"action=getMsg",
+        type: "GET",
+        url: "Index.aspx",
+        data: "action=getMsg&recid=" + rec_id,
         success: function (data) {
-            $("#chat-dialog-con").html(data);
-            if (flagB) {
-                scrollB();
-            }
+            $(".m-message ul").html(data);
+            scrollB();
         }
     });
 }
@@ -153,29 +124,26 @@ function GetOnline() {
         data: "action=getOnline",
         success: function (data) {
             if (data != "null") {
-                $("#chat-user-con ul").html(data);
+                $("#m-list-ul").html(data);
+            } else {
+                console.log("user list data null");
             }
         }
     });
 }
-
-//判断是否到达底部
+//是否底部
 function isBottom() {
-    $("#right-content-b").scroll(function () {
-        var scrollTop = $(this).scrollTop();
-        var scrollHeight = $(document).height();
-        var windowHeight = $(this).height();
-        console.log(scrollTop, scrollHeight, windowHeight);
-        //if (scrollTop + windowHeight > scrollHeight-50) {
-        //    return true;
-        //} else {
-        //    return false;
-        //}
-    });
+    var viewH = $(".m-message").height(),//可见高度
+      contentH = $(".m-message").get(0).scrollHeight,//内容高度
+      scrollTop = $(".m-message").scrollTop();//滚动高度
+    if ((scrollTop + viewH) <= contentH - 20) {
+        Bflag = true;
+    }
+    else {
+        Bflag = false;
+    }
 }
 //自动滚动到底部
 function scrollB() {
-    //$("#right-content-b").scrollTop($("#right-content-b")[0].scrollHeight-55);
-    $("#right-content-b").scrollTop($("#right-content-b")[0].scrollHeight);
-    //console.log($("#right-content-b")[0].scrollHeight);
+    $(".m-message").scrollTop($(".m-message")[0].scrollHeight);
 }

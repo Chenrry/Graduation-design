@@ -44,37 +44,47 @@ namespace Chat.Dal
         public void Update(Messages model)
         {
             SqlHelper.ExecuteNonQuery("UPDATE Messages SET "
-+ "[Msg_ID]=@Msg_ID,"
-+ "[Msg_con]=@Msg_con,"
-+ "[Msg_send]=@Msg_send,"
-+ "[Msg_rec]=@Msg_rec,"
-+ "[Msg_sendTime]=@Msg_sendTime"
-+ " WHERE RowGuid=@RowGuid", new SqlParameter("@Msg_ID", SqlHelper.ToDbValue(model.Msg_ID)),
-new SqlParameter("@Msg_con", SqlHelper.ToDbValue(model.Msg_con)),
-new SqlParameter("@Msg_send", SqlHelper.ToDbValue(model.Msg_send)),
-new SqlParameter("@Msg_rec", SqlHelper.ToDbValue(model.Msg_rec)),
-new SqlParameter("@Msg_sendTime", SqlHelper.ToDbValue(model.Msg_sendTime)));
-        }
-
-        public void Insert(Messages model)
-        {
-            SqlHelper.ExecuteNonQuery("INSERT INTO Messages("
-             + "[Msg_ID],"
-             + "[Msg_con],"
-             + "[Msg_send],"
-             + "[Msg_rec],"
-             + "[Msg_sendTime]) VALUES("
-             + "@Msg_ID,"
-             + "@Msg_con,"
-             + "@Msg_send,"
-             + "@Msg_rec,"
-             + "@Msg_sendTime) ",
-            new SqlParameter("@Msg_ID", SqlHelper.ToDbValue(model.Msg_ID)),
+            + "[Msg_ID]=@Msg_ID,"
+            + "[Msg_con]=@Msg_con,"
+            + "[Msg_send]=@Msg_send,"
+            + "[Msg_rec]=@Msg_rec,"
+            + "[Msg_sendTime]=@Msg_sendTime"
+            + " WHERE RowGuid=@RowGuid", new SqlParameter("@Msg_ID", SqlHelper.ToDbValue(model.Msg_ID)),
             new SqlParameter("@Msg_con", SqlHelper.ToDbValue(model.Msg_con)),
             new SqlParameter("@Msg_send", SqlHelper.ToDbValue(model.Msg_send)),
             new SqlParameter("@Msg_rec", SqlHelper.ToDbValue(model.Msg_rec)),
             new SqlParameter("@Msg_sendTime", SqlHelper.ToDbValue(model.Msg_sendTime)));
         }
 
+        public void Insert(Messages model)
+        {
+            SqlHelper.ExecuteNonQuery("INSERT INTO Messages("
+             + "[Msg_con],"
+             + "[Msg_send],"
+             + "[Msg_rec],"
+             + "[Msg_sendTime]) VALUES("
+             + "@Msg_con,"
+             + "@Msg_send,"
+             + "@Msg_rec,"
+             + "@Msg_sendTime) ",
+            new SqlParameter("@Msg_con", SqlHelper.ToDbValue(model.Msg_con)),
+            new SqlParameter("@Msg_send", SqlHelper.ToDbValue(model.Msg_send)),
+            new SqlParameter("@Msg_rec", SqlHelper.ToDbValue(model.Msg_rec)),
+            new SqlParameter("@Msg_sendTime", SqlHelper.ToDbValue(model.Msg_sendTime)));
+        }
+
+        public DataTable GetMessage(string rec_id, int send_id)
+        {
+            string Sql;
+            if ((rec_id == null)||(rec_id == ""))
+            {
+                 Sql = "select NickName,Msg_con,Msg_send,Msg_sendTime from Messages inner join users on Messages.Msg_send = users.UserID where Msg_rec is null";
+            }
+            else
+            {
+                 Sql = "select NickName,Msg_con,Msg_send,Msg_sendTime from Messages inner join users on Messages.Msg_send = users.UserID where (Msg_rec=" + rec_id + " and Msg_send=" + send_id + ") or (Msg_rec=" + send_id + " and Msg_send=" + rec_id + ")";
+            }
+            return SqlHelper.ExecuteDataTable(Sql);
+        }
     }
 }

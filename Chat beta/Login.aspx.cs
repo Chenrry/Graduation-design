@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Chat.Dal;
+using System.Data;
 
 public partial class Login : System.Web.UI.Page
 {
@@ -15,13 +17,25 @@ public partial class Login : System.Web.UI.Page
     //用户登录
     protected void UserLogin(string name, string pwd)
     {
-        if ((name == "张三" || name == "李四" || name == "王二" || name == "麻子") && pwd == "123456")
+        usersDal md = new usersDal();
+        DataTable dt1 = md.inquiry_login(name);
+
+        if (dt1.Rows.Count <= 0)
         {
-            Session["user"] = name; //记录用户登录状态
-            Application["user"] = name; //记录用户发送内容
+            Response.Redirect("fail");
+            return;
+        }
+
+        if (dt1.Rows[0][0].ToString() == pwd)
+        {
+            Session["user"] = dt1.Rows[0][1].ToString();
+            Session["userid"] = name;
             Response.Write("success");
         }
         else
-            Response.Write("fail");
+        {
+            Response.Redirect("fail");
+        }
+
     }
 }

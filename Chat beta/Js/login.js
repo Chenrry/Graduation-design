@@ -1,13 +1,16 @@
 ﻿$(function () {
+
     //登录判断
-    $("#btnLogin").click(function () {
+    $("#login-button").click(function () {
         var name = $("#txtName");
         var pwd = $("#txtPwd");
-        if (name.val().replace(" ", "") != "" && pwd.val().replace(" ", "") != "") {
+        if ($.trim(name.val()) != "" && $.trim(pwd.val()) != "") {
+            console.log("login");
             Login(name.val(), pwd.val());
+            return false;
         }
         else {
-            if (name.val().replace(" ", "") == "") {
+            if ($.trim(name.val())== "") {
                 alert("用户名不能为空!");
                 name.focus();
                 return false;
@@ -19,29 +22,18 @@
             }
         }
     });
-
-    //取消登录
-    $("#btnCancel").click(function () {
-        $("#txtName").val("");
-        $("#txtPwd").val("");
-    });
 });
 
 //登录
 function Login(name, pwd) {
-    $("#login-msg").ajaxStart(function () {
-        $(this).show().html("正在发送登录请求...");
-    });
-    $("#login-msg").ajaxStop(function () {
-        $(this).html("请求处理已完成。").hide();
-    });
+    //debugger
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: "Login.aspx",
-        data: "name=" +encodeURI(name) + "&pwd=" + pwd,
-        success: function (data) {
-            if (data == "success") {
-                window.location.href = "Index.html";
+        data: "name=" + name + "&pwd=" + pwd,
+        success: function (res) {
+            if (res == "success") {
+                location.href = "Index.html";
             }
             else {
                 alert("用户名或密码不正确!");

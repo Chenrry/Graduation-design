@@ -8,8 +8,7 @@ namespace Chat.Dal
     static class SqlHelper
     {
 
-        public static readonly string connstr =
-            ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        public static readonly string connstr =ConfigurationManager.ConnectionStrings["sqlcon1"].ConnectionString;
 
         public static int ExecuteNonQuery(string sql,
             params SqlParameter[] parameters)
@@ -41,8 +40,7 @@ namespace Chat.Dal
             }
         }
 
-        public static DataTable ExecuteDataTable(string sql,
-            params SqlParameter[] parameters)
+        public static DataTable ExecuteDataTable(string sql,params SqlParameter[] parameters)
         {
             using (SqlConnection conn = new SqlConnection(connstr))
             {

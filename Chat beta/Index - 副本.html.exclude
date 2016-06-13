@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My IM</title>
+    <link rel="stylesheet" type="text/css" href="Css/index_style.css">
+    <script src="Js/jquery-1.8.2.min.js"></script>
+    <script src="Js/chat.js"></script>    
+    <script src="Js/jquery.nicescroll.min.js"></script>
+</head>
+<body>
+    <div id="floor" class="clear-fix">
+        <div id="leftcontent">
+            <div class="userinfo clear-fix">
+                <div class="userpic"><img src="Images/usericon.jpg"></div>
+                <div class="usersup">
+                    <span class="username" id="username">丁丁</span>
+                    <select name="status" id="status" class="status" >
+                        <option value="1">在线</option>
+                        <option value="2">忙碌</option>
+                        <option value="3">离开</option>
+                        <option value="4">隐身</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="chat-user">
+                <div id="chat-user-con">
+                    <ul>
+                        <li><div class="user-list-ico"><img src="Images/usericon.jpg"></div>aaa</li>
+                        <li><div class="user-list-ico"><img src="Images/usericon.jpg"></div>aaa</li>
+                        <li>aaa</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="rightcontent">
+            <div id="right-title">
+                <p id="chater-name" class="right-title-text">文件传输助手</p>
+            </div>
+            <hr class="right-hr">
+            <div class="right-content" id="right-content-b">
+                <ul id="chat-dialog-con">
+                    <li class="timeshow"><p>21:36</p></li>
+                    <li class="rec-msg clear-fix">
+                        <div class="chating-icon icon-left">
+                            <img src="Images/usericon.jpg">
+                        </div>
+                        <div class="mes-con re-mes">
+                            <p>hahahahahahahahahahahahahahahahahh</p>
+                        </div>
+                    </li>
+                    <li class="send-msg clear-fix">
+                        <div class="chating-icon icon-right">
+                            <img src="Images/usericon.jpg">
+                        </div>
+                        <div class="mes-con send-mes">
+                            <p>hahahahahahahahahahahahahahahahahh</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <hr class="right-hr">
+            <div id="right-tools">
+            </div>
+            <div id="right-input">
+                <textarea id="txtInput" class="input-block"></textarea>
+            </div>
+            <div id="input-btn" class="right-sender">
+                <input type="button" id="btnSend" class="senderbtn" value="发送">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

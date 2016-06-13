@@ -1,76 +1,311 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>My IM</title>
-    <link rel="stylesheet" type="text/css" href="Css/index_style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="Js/jquery-1.8.2.min.js"></script>
-    <script src="Js/chat.js"></script>    
-    <script src="Js/jquery.nicescroll.min.js"></script>
-</head>
-<body>
-    <div id="floor" class="clear-fix">
-        <div id="leftcontent">
-            <div class="userinfo clear-fix">
-                <div class="userpic"><img src="Images/usericon.jpg"></div>
-                <div class="usersup">
-                    <span class="username" id="username">丁丁</span>
-                    <select name="status" id="status" class="status">
-                        <option value="1">在线</option>
-                        <option value="2">忙碌</option>
-                        <option value="3">离开</option>
-                        <option value="4">隐身</option>
-                    </select>
-                </div>
-            </div>
+    <script src="Js/chat.js"></script>
+    <title>Wang Chat</title>
+    <style>
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
 
-            <div id="chat-user">
-                <div id="chat-user-con">
-                    <ul>
-                        <li><div class="user-list-ico"><img src="Images/usericon.jpg"></div>aaa</li>
-                        <li><div class="user-list-ico"><img src="Images/usericon.jpg"></div>aaa</li>
-                        <li>aaa</li>
-                    </ul>
-                </div>
+        body,
+        html {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body,
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            color: #4d4d4d;
+            font: 14px/1.4em 'Helvetica Neue', Helvetica, 'Microsoft Yahei', Arial, sans-serif;
+            background: #f5f5f5 url('images/bg.jpg') no-repeat center;
+            background-size: cover;
+            font-smoothing: antialiased;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #chat {
+            margin: 20px auto;
+            width: 800px;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 3px;
+            overflow: hidden;
+            border-radius: 3px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -300px;
+            margin-left: -400px;
+        }
+
+            #chat .main,
+            #chat .sidebar {
+                height: 100%;
+            }
+
+            #chat .sidebar {
+                float: left;
+                width: 200px;
+                color: #f4f4f4;
+                background-color: #2e3238;
+            }
+
+            #chat .main {
+                position: relative;
+                overflow: hidden;
+                background-color: #eee;
+            }
+
+            #chat .m-text {
+                position: absolute;
+                width: 100%;
+                bottom: 0;
+                left: 0;
+            }
+
+            #chat .m-message {
+                height: calc(100% - 10pc);
+            }
+
+        .m-card {
+            padding: 9pt;
+            border-bottom: 1px solid #24272c;
+        }
+
+            .m-card footer {
+                margin-top: 10px;
+            }
+
+            .m-card .avatar,
+            .m-card .name {
+                vertical-align: middle;
+            }
+
+            .m-card .avatar {
+                border-radius: 2px;
+            }
+
+            .m-card .name {
+                display: inline-block;
+                margin: 0 0 0 15px;
+                font-size: 1pc;
+            }
+
+            .m-card .search {
+                padding: 0 10px;
+                width: 100%;
+                font-size: 9pt;
+                color: #fff;
+                height: 30px;
+                line-height: 30px;
+                border: 1px solid #3a3a3a;
+                border-radius: 4px;
+                outline: 0;
+                background-color: #26292e;
+            }
+
+        .m-list li {
+            padding: 9pt 15px;
+            border-bottom: 1px solid #292c33;
+            cursor: pointer;
+            -webkit-transition: background-color .1s;
+            transition: background-color .1s;
+        }
+
+            .m-list li:hover {
+                background-color: hsla(0, 0%, 100%, .03);
+            }
+
+            .m-list li.active {
+                background-color: hsla(0, 0%, 100%, .1);
+            }
+
+        .m-list .avatar,
+        .m-list .name {
+            vertical-align: middle;
+        }
+
+        .m-list .avatar {
+            border-radius: 2px;
+        }
+
+        .m-list .name {
+            display: inline-block;
+            margin: 0 0 0 15px;
+        }
+
+        .m-text {
+            height: 10pc;
+            border-top: 1px solid #ddd;
+        }
+
+            .m-text textarea {
+                padding: 10px;
+                height: 100%;
+                width: 100%;
+                border: none;
+                outline: 0;
+                font-family: Micrsofot Yahei;
+                resize: none;
+            }
+
+        .m-message {
+            padding: 10px 15px;
+            overflow-y: scroll;
+        }
+
+            .m-message li {
+                margin-bottom: 15px;
+            }
+
+            .m-message .time {
+                margin: 7px 0;
+                text-align: center;
+            }
+
+                .m-message .time > span {
+                    display: inline-block;
+                    padding: 0 18px;
+                    font-size: 9pt;
+                    color: #fff;
+                    border-radius: 2px;
+                    background-color: #dcdcdc;
+                }
+
+            .m-message .avatar {
+                float: left;
+                margin: 0 10px 0 0;
+                border-radius: 3px;
+            }
+
+            .m-message .text {
+                display: inline-block;
+                position: relative;
+                padding: 0 10px;
+                max-width: calc(100% - 40px);
+                min-height: 30px;
+                line-height: 2.5;
+                font-size: 9pt;
+                text-align: left;
+                word-break: break-all;
+                background-color: #fafafa;
+                border-radius: 4px;
+            }
+
+                .m-message .text:before {
+                    content: " ";
+                    position: absolute;
+                    top: 9px;
+                    right: 100%;
+                    border: 6px solid transparent;
+                    border-right-color: #fafafa;
+                }
+
+        .chat-list-name {
+            font-size: 12px;
+            width: 50px;
+            display: inline-block;
+            color: #aaa;
+        }
+
+        .m-message .self {
+            text-align: right;
+        }
+
+            .m-message .self .avatar {
+                float: right;
+                margin: 0 0 0 10px;
+            }
+
+            .m-message .self .text {
+                background-color: #b2e281;
+            }
+
+                .m-message .self .text:before {
+                    right: inherit;
+                    left: 100%;
+                    border-right-color: transparent;
+                    border-left-color: #b2e281;
+                }
+    </style>
+</head>
+
+<body>
+    <div id="chat">
+        <div class="sidebar">
+            <div class="m-card">
+                <header>
+                    <img class="avatar" width="40" height="40" alt="Coffce" src="Images/1.jpg">
+                    <p class="name" id="username">Coffce</p>
+                </header>
+                <!--<footer>
+                    <input class="search" placeholder="search user...">
+                </footer>-->
             </div>
-        </div>
-        <div id="rightcontent">
-            <div id="right-title">
-                <p id="chater-name" class="right-title-text">文件传输助手</p>
-            </div>
-            <hr class="right-hr">
-            <div class="right-content" id="right-content-b">
-                <ul id="chat-dialog-con">
-                    <li class="timeshow"><p>21:36</p></li>
-                    <li class="rec-msg clear-fix">
-                        <div class="chating-icon icon-left">
-                            <img src="Images/usericon.jpg">
-                        </div>
-                        <div class="mes-con re-mes">
-                            <p>hahahahahahahahahahahahahahahahahh</p>
-                        </div>
+            <!--v-component-->
+            <div class="m-list">
+                <ul id="m-list-ul">
+                    <!--
+                    <li class="active">
+                        <img  alt="try" src="Images/2.png">
+                        <p class="name">try</p>
                     </li>
-                    <li class="send-msg clear-fix">
-                        <div class="chating-icon icon-right">
-                            <img src="Images/usericon.jpg">
-                        </div>
-                        <div class="mes-con send-mes">
-                            <p>hahahahahahahahahahahahahahahahahh</p>
-                        </div>
-                    </li>
+                    <li class="active">
+                        <img  alt="try" src="Images/2.png">
+                        <p class="name">try</p>
+                    </li>-->
                 </ul>
             </div>
-            <hr class="right-hr">
-            <div id="right-tools">
+            <!--v-component-->
+        </div>
+        <div class="main">
+            <div class="m-message">
+                <ul>
+                    <!--v-for-start-->
+                    <li>
+                        <p class="time"><span>23:00</span></p>
+                        <div class="main">
+                            <img class="avatar" width="30" height="30" src="Images/2.png">
+                            <div class="text">Hello，这是一个基于Vue + Webpack构建的简单chat示例，聊天记录保存在localStorge。简单演示了Vue的基础特性和webpack配置。</div>
+                        </div>
+                    </li>
+                    <li>
+                        <p class="time"><span>23:00</span></p>
+                        <div class="main">
+                            <img class="avatar" width="30" height="30" src="Images/2.png">
+                            <div class="text">项目地址: https://github.com/coffcer/vue-chat</div>
+                        </div>
+                    </li>
+                    <li>
+                        <p class="time"><span>23:3</span></p>
+                        <div class="main self">
+                            <img class="avatar" width="30" height="30" src="Images/1.jpg">
+                            <div class="text">7</div>
+                        </div>
+                    </li>
+                    <!--v-for-end-->
+                </ul>
             </div>
-            <div id="right-input">
-                <textarea id="txtInput" class="input-block"></textarea>
+            <!--v-component-->
+            <div class="m-text">
+                <textarea id="txtInput" placeholder="按 Enter 发送"></textarea>
             </div>
-            <div id="input-btn" class="right-sender">
-                <input type="button" id="btnSend" class="senderbtn" value="发送">
-            </div>
+            <!--v-component-->
         </div>
     </div>
-
 </body>
+
 </html>
