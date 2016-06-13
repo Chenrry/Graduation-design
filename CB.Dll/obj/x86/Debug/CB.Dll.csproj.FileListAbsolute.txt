@@ -1,0 +1,5 @@
+E:\Chat beta\CB.Dll\bin\x86\Debug\CB.Dll.dll
+E:\Chat beta\CB.Dll\bin\x86\Debug\CB.Dll.pdb
+E:\Chat beta\CB.Dll\obj\x86\Debug\CB.Dll.dll
+E:\Chat beta\CB.Dll\obj\x86\Debug\CB.Dll.pdb
+E:\Chat beta\CB.Dll\obj\x86\Debug\CB.Dll.csprojResolveAssemblyReference.cache
